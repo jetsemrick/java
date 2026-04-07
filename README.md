@@ -12,7 +12,7 @@ This repository’s **`main`** branch holds the **Apache HertzBeat** incident-de
 
 ## Requirements
 
-- **JDK 17** (full JDK, not JRE only). Set `JAVA_HOME` as described in [INSTALL](INSTALL).
+- **JDK 17** (full JDK, not JRE only). Set `JAVA_HOME` to a JDK 17 install. This tree uses **Gradle 7.6**; newer JDKs (e.g. 21+) can fail the build with `Unsupported class file major version` until Gradle is upgraded upstream—use JDK 17 for demos.
 
 ## Quick start (first-time)
 
