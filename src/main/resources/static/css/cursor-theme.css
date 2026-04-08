@@ -292,6 +292,34 @@ input:focus {
   color: var(--color-fg-muted);
 }
 
+/* Home: demo fulfillment copy — high contrast so it is not mistaken for empty space */
+.fulfillment-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  margin: 1rem 0 1.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-card);
+  box-shadow: var(--shadow);
+}
+
+.fulfillment-banner__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+}
+
+.fulfillment-banner__text {
+  font-size: 0.95rem;
+  color: var(--color-fg);
+}
+
 .empty-state {
   padding: 2rem 1rem;
   text-align: center;

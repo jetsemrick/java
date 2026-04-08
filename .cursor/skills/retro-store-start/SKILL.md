@@ -38,6 +38,7 @@ Wait for `Tomcat started on port 8080`, then open:
 ## Prerequisites
 
 - **Java 17+** (Gradle toolchain resolves 17 if installed)
+- **Gradle 9.3** via wrapper (`gradle/wrapper`). In IntelliJ, if Gradle sync complains about the JVM, set **Gradle JVM** to JDK 17–23 in Gradle settings (see repo `README.md`).
 - **Network** on first run (Gradle may download dependencies)
 
 ## If port 8080 is busy

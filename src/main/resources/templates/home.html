@@ -10,6 +10,11 @@
     <p class="lead">Browse by category. Add to cart, adjust quantities, and complete a mock checkout — a multi-file
         Java demo that pairs domain logic with a Cursor-inspired UI.</p>
 
+    <aside class="fulfillment-banner" id="fulfillment-status" role="status" aria-label="Estimated fulfillment">
+        <span class="fulfillment-banner__label">Fulfillment ETA</span>
+        <span class="fulfillment-banner__text" th:text="${fulfillmentBanner}">Fulfillment: orders ship within …</span>
+    </aside>
+
     <section th:each="cat : ${categories}">
         <h2>
             <a th:href="@{/categories/{id}(id=${cat.id})}" th:text="${cat.name}">Category</a>

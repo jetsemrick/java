@@ -3,6 +3,7 @@ package com.cursor.retrostore.web;
 import com.cursor.retrostore.catalog.CatalogService;
 import com.cursor.retrostore.catalog.Category;
 import com.cursor.retrostore.catalog.Product;
+import com.cursor.retrostore.fulfillment.FulfillmentEtaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +15,18 @@ import java.util.List;
 public class StoreController {
 
     private final CatalogService catalogService;
+    private final FulfillmentEtaService fulfillmentEtaService;
 
-    public StoreController(CatalogService catalogService) {
+    public StoreController(CatalogService catalogService, FulfillmentEtaService fulfillmentEtaService) {
         this.catalogService = catalogService;
+        this.fulfillmentEtaService = fulfillmentEtaService;
     }
 
     @GetMapping("/")
     public String home(Model model) {
         List<Category> categories = catalogService.findAllCategoriesWithProducts();
         model.addAttribute("categories", categories);
+        model.addAttribute("fulfillmentBanner", fulfillmentEtaService.homeBannerText());
         return "home";
     }
 
