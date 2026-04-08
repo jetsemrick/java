@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title>Order confirmation — Cursor Retro Parts</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <h1>Order placed</h1>
+    <p class="lead">Thank you. This is a mock order stored in the embedded H2 database for the demo.</p>
+
+    <div class="card" style="max-width: 640px;">
+        <p><strong>Order ID:</strong> <span th:text="${order.id}">0</span></p>
+        <p th:if="${order.customerEmail != null}">
+            <strong>Email:</strong> <span th:text="${order.customerEmail}">you@example.com</span>
+        </p>
+        <p><strong>Total:</strong> <span class="price" th:text="${#numbers.formatCurrency(order.totalAmount)}">$0.00</span></p>
+        <p class="card__meta" th:text="${order.createdAt}">time</p>
+    </div>
+
+    <h2>Lines</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Line</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="line : ${order.lines}">
+            <td th:text="${line.productName}">Name</td>
+            <td th:text="${line.quantity}">1</td>
+            <td th:text="${#numbers.formatCurrency(line.unitPrice)}">$0.00</td>
+            <td th:text="${#numbers.formatCurrency(line.lineTotal)}">$0.00</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row" style="margin-top: 1.5rem;">
+        <a class="btn btn--primary" th:href="@{/}">Back to shop</a>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

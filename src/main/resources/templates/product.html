@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title th:text="${product.name} + ' — Cursor Retro Parts'">Product</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <p class="lead"><a th:href="@{/}">&larr; Back to shop</a></p>
+    <article class="card" style="max-width: 720px;">
+        <div class="pill" th:text="${product.sku}">SKU</div>
+        <h1 th:text="${product.name}">Product</h1>
+        <p th:text="${product.description}">Description</p>
+        <p class="card__meta">In stock: <span th:text="${product.stockQuantity}">0</span></p>
+        <p class="price" th:text="${#numbers.formatCurrency(product.price)}">$0.00</p>
+
+        <form class="stack" style="margin-top: 1rem;" th:action="@{/cart/add}" method="post">
+            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <div class="row">
+                <label>
+                    Quantity
+                    <input type="number" name="quantity" value="1" min="1" th:attr="max=${product.stockQuantity}"/>
+                </label>
+            </div>
+            <div class="row">
+                <button class="btn btn--primary" type="submit">Add to cart</button>
+                <a class="btn btn--ghost" th:href="@{/cart}">View cart</a>
+            </div>
+        </form>
+    </article>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

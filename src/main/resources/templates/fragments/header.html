@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="site-header" th:fragment="header">
+    <div class="site-header__inner">
+        <div class="brand">
+            <a class="brand__title" th:href="@{/}">Cursor Retro Parts</a>
+            <span class="brand__tagline">Online store demo — keyboards, boards, storage, video, audio</span>
+        </div>
+        <nav class="nav" aria-label="Primary">
+            <a th:href="@{/}">Shop</a>
+            <a th:href="@{/admin/catalog}">Admin catalog</a>
+            <a th:href="@{/cart}">
+                Cart
+                <span class="badge" th:if="${cartItemCount > 0}" th:text="${cartItemCount}">0</span>
+            </a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

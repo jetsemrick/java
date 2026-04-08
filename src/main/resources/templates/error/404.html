@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title>Not found — Cursor Retro Parts</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <h1>Not found</h1>
+    <p class="lead" th:text="${message}">Resource not found.</p>
+    <a class="btn btn--primary" th:href="@{/}">Home</a>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

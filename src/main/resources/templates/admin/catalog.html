@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title>Admin catalog — Cursor Retro Parts</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <h1>Admin: catalog overview</h1>
+    <p class="lead">Read-only inventory view for demos — same data as the storefront, grouped by category.</p>
+
+    <section th:each="cat : ${categories}">
+        <h2 th:text="${cat.name}">Category</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${cat.products}">
+                <td th:text="${p.sku}">SKU</td>
+                <td>
+                    <a th:href="@{/products/{id}(id=${p.id})}" th:text="${p.name}">Name</a>
+                </td>
+                <td th:text="${#numbers.formatCurrency(p.price)}">$0.00</td>
+                <td th:text="${p.stockQuantity}">0</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

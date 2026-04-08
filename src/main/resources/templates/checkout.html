@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title>Checkout — Cursor Retro Parts</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <h1>Checkout (mock)</h1>
+    <p class="lead">Enter an optional email and confirm demo terms. No payment is processed.</p>
+
+    <div class="card card--muted" style="max-width: 520px;">
+        <form th:action="@{/checkout}" th:object="${checkoutForm}" method="post" class="stack">
+            <div class="form-row">
+                <label for="email">Email (optional)</label>
+                <input id="email" type="text" th:field="*{email}" autocomplete="email"/>
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+            </div>
+            <div class="form-row">
+                <label>
+                    <input type="checkbox" th:field="*{agreeTerms}"/>
+                    I agree this is a demo checkout only
+                </label>
+                <div class="error" th:if="${#fields.hasErrors('agreeTerms')}" th:errors="*{agreeTerms}">Error</div>
+            </div>
+            <button class="btn btn--primary" type="submit">Place order</button>
+        </form>
+    </div>
+
+    <h2>Order preview</h2>
+    <table class="table">
+        <tbody>
+        <tr th:each="line : ${lines}">
+            <td th:text="${line.product.name}">Item</td>
+            <td th:text="${line.quantity}">1</td>
+            <td th:text="${#numbers.formatCurrency(line.lineTotal)}">$0.00</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><strong>Subtotal:</strong> <span class="price" th:text="${#numbers.formatCurrency(subtotal)}">$0.00</span></p>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

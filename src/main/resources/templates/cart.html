@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head(~{::title})}">
+    <title>Cart — Cursor Retro Parts</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <h1>Cart</h1>
+    <p class="lead" th:if="${itemCount == 0}">Your cart is empty.</p>
+
+    <div th:if="${itemCount > 0}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Line</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="line : ${lines}">
+                <td>
+                    <strong th:text="${line.product.name}">Name</strong>
+                    <div class="card__meta" th:text="${line.product.sku}">SKU</div>
+                </td>
+                <td>
+                    <form th:action="@{/cart/update}" method="post" class="row">
+                        <input type="hidden" name="productId" th:value="${line.product.id}"/>
+                        <input type="number" name="quantity" min="0" th:value="${line.quantity}"
+                               th:attr="max=${line.product.stockQuantity}" style="max-width: 5rem;"/>
+                        <button class="btn btn--ghost" type="submit">Update</button>
+                    </form>
+                </td>
+                <td th:text="${#numbers.formatCurrency(line.lineTotal)}">$0.00</td>
+                <td>
+                    <form th:action="@{/cart/remove}" method="post">
+                        <input type="hidden" name="productId" th:value="${line.product.id}"/>
+                        <button class="btn btn--ghost" type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p><strong>Subtotal:</strong> <span class="price" th:text="${#numbers.formatCurrency(subtotal)}">$0.00</span></p>
+        <div class="row">
+            <a class="btn btn--primary" th:href="@{/checkout}">Checkout</a>
+            <a class="btn btn--ghost" th:href="@{/}">Continue shopping</a>
+        </div>
+    </div>
+
+    <div th:if="${itemCount == 0}" class="empty-state">
+        <a class="btn btn--primary" th:href="@{/}">Browse parts</a>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
